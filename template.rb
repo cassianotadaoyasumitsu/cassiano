@@ -216,11 +216,3 @@ after_bundle do
   # Fix puma config
   gsub_file('config/puma.rb', 'pidfile ENV.fetch("PIDFILE") { "tmp/pids/server.pid" }', '# pidfile ENV.fetch("PIDFILE") { "tmp/pids/server.pid" }')
 end
-
-
-
-# rails new \
-#   --database postgresql \
-#   --webpack \
-#   -m https://raw.githubusercontent.com/cassianotadaoyasumitsu/cassiano/master/template.rb \
-#   CHANGE_THIS_TO_YOUR_RAILS_APP_NAME
