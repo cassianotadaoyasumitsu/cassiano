@@ -141,8 +141,8 @@ after_bundle do
 
   # migrate + devise views
   ########################################
-  rails_command 'db:migrate'
-  generate('devise:views')
+  # rails_command 'db:migrate'
+  # generate('devise:views')
 
   # Pages Controller
   ########################################
