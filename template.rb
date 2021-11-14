@@ -22,70 +22,70 @@ end
 
 gsub_file('Gemfile', /# gem 'redis'/, "gem 'redis'")
 
-# # Assets
-# ########################################
-# run 'rm -rf app/assets/stylesheets'
-# run 'rm -rf vendor'
-# run 'curl -L https://github.com/lewagon/rails-stylesheets/archive/master.zip > stylesheets.zip'
-# run 'unzip stylesheets.zip -d app/assets && rm stylesheets.zip && mv app/assets/rails-stylesheets-master app/assets/stylesheets'
+# Assets
+########################################
+run 'rm -rf app/assets/stylesheets'
+run 'rm -rf vendor'
+run 'curl -L https://github.com/lewagon/rails-stylesheets/archive/master.zip > stylesheets.zip'
+run 'unzip stylesheets.zip -d app/assets && rm stylesheets.zip && mv app/assets/rails-stylesheets-master app/assets/stylesheets'
 
-# # Dev environment
-# ########################################
-# gsub_file('config/environments/development.rb', /config\.assets\.debug.*/, 'config.assets.debug = false')
+# Dev environment
+########################################
+gsub_file('config/environments/development.rb', /config\.assets\.debug.*/, 'config.assets.debug = false')
 
-# # Layout
-# ########################################
-# if Rails.version < "6"
-#   scripts = <<~HTML
-#     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload', defer: true %>
-#         <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-#   HTML
-#   gsub_file('app/views/layouts/application.html.erb', "<%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>", scripts)
-# end
+# Layout
+########################################
+if Rails.version < "6"
+  scripts = <<~HTML
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload', defer: true %>
+        <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  HTML
+  gsub_file('app/views/layouts/application.html.erb', "<%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>", scripts)
+end
 
-# gsub_file('app/views/layouts/application.html.erb', "<%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>", "<%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload', defer: true %>")
+gsub_file('app/views/layouts/application.html.erb', "<%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>", "<%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload', defer: true %>")
 
-# style = <<~HTML
-#   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-#       <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-# HTML
-# gsub_file('app/views/layouts/application.html.erb', "<%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>", style)
+style = <<~HTML
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+HTML
+gsub_file('app/views/layouts/application.html.erb', "<%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>", style)
 
-# # Flashes
-# ########################################
-# file 'app/views/shared/_flashes.html.erb', <<~HTML
-#   <% if notice %>
-#     <div class="alert alert-info alert-dismissible fade show m-1" role="alert">
-#       <%= notice %>
-#       <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-#         <span aria-hidden="true">&times;</span>
-#       </button>
-#     </div>
-#   <% end %>
-#   <% if alert %>
-#     <div class="alert alert-warning alert-dismissible fade show m-1" role="alert">
-#       <%= alert %>
-#       <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-#         <span aria-hidden="true">&times;</span>
-#       </button>
-#     </div>
-#   <% end %>
-# HTML
+# Flashes
+########################################
+file 'app/views/shared/_flashes.html.erb', <<~HTML
+  <% if notice %>
+    <div class="alert alert-info alert-dismissible fade show m-1" role="alert">
+      <%= notice %>
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+  <% end %>
+  <% if alert %>
+    <div class="alert alert-warning alert-dismissible fade show m-1" role="alert">
+      <%= alert %>
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+  <% end %>
+HTML
 
-# run 'curl -L https://github.com/lewagon/awesome-navbars/raw/master/templates/_navbar_wagon.html.erb > app/views/shared/_navbar.html.erb'
+run 'curl -L https://github.com/lewagon/awesome-navbars/raw/master/templates/_navbar_wagon.html.erb > app/views/shared/_navbar.html.erb'
 
-# inject_into_file 'app/views/layouts/application.html.erb', after: '<body>' do
-#   <<-HTML
+inject_into_file 'app/views/layouts/application.html.erb', after: '<body>' do
+  <<-HTML
 
-#     <%= render 'shared/navbar' %>
-#     <%= render 'shared/flashes' %>
-#   HTML
-# end
+    <%= render 'shared/navbar' %>
+    <%= render 'shared/flashes' %>
+  HTML
+end
 
 # README
 ########################################
 markdown_file_content = <<-MARKDOWN
-Rails app generated by Cassiano
+Rails app generated by USERi team.
 MARKDOWN
 file 'README.md', markdown_file_content, force: true
 
@@ -141,8 +141,8 @@ after_bundle do
 
   # migrate + devise views
   ########################################
-  # rails_command 'db:migrate'
-  # generate('devise:views')
+  rails_command 'db:migrate'
+  generate('devise:views')
 
   # Pages Controller
   ########################################
@@ -168,7 +168,7 @@ after_bundle do
 
 
     // ----------------------------------------------------
-    // Note(lewagon): ABOVE IS RAILS DEFAULT CONFIGURATION
+    // Note(USERi): ABOVE IS RAILS DEFAULT CONFIGURATION
     // WRITE YOUR OWN JS STARTING FROM HERE 👇
     // ----------------------------------------------------
 
@@ -206,13 +206,10 @@ after_bundle do
 
   # Rubocop
   ########################################
-  run 'curl -L https://raw.githubusercontent.com/cassianotadaoyasumitsu/cassiano/master/.rubocop.yml > .rubocop.yml'
+  run 'curl -L https://raw.githubusercontent.com/lewagon/rails-templates/master/.rubocop.yml > .rubocop.yml'
 
   # Git
   ########################################
   git add: '.'
-  git commit: "-m 'Initial commit with devise template'"
-
-  # Fix puma config
-  gsub_file('config/puma.rb', 'pidfile ENV.fetch("PIDFILE") { "tmp/pids/server.pid" }', '# pidfile ENV.fetch("PIDFILE") { "tmp/pids/server.pid" }')
+  git commit: "-m 'Initial commit with devise'"
 end
