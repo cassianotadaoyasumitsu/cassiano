@@ -5,7 +5,7 @@
 rails new \
   -d postgresql \
   -j webpack \
-  -m https://raw.githubusercontent.com/cassianotadaoyasumitsu/cassiano/master/template2.rb \
-  APP_NAME
+  -m https://raw.githubusercontent.com/lewagon/rails-templates/master/devise.rb \
+  CHANGE_THIS_TO_YOUR_RAILS_APP_NAME
 ```
 
