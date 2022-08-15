@@ -74,7 +74,7 @@ end
 # README
 ########################################
 markdown_file_content = <<~MARKDOWN
-  Rails app generated with [lewagon/rails-templates](https://github.com/lewagon/rails-templates), created by the [CTY] team.
+  Rails app generated with [lewagon/rails-templates](https://github.com/lewagon/rails-templates), created by the [Le Wagon coding bootcamp](https://www.lewagon.com) team.
 MARKDOWN
 file "README.md", markdown_file_content, force: true
 
@@ -187,11 +187,11 @@ after_bundle do
 
   # Rubocop
   ########################################
-  run "curl -L https://raw.githubusercontent.com/cassianotadaoyasumitsu/cassiano/master/.rubocop.yml > .rubocop.yml"
+  run "curl -L https://raw.githubusercontent.com/lewagon/rails-templates/master/.rubocop.yml > .rubocop.yml"
 
   # Git
   ########################################
   git :init
   git add: "."
-  git commit: "-m 'Initial commit with devise template.'"
+  git commit: "-m 'Initial commit'"
 end
