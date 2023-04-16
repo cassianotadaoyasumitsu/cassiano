@@ -13,4 +13,6 @@ rails new \
 
 # Rails 7 needs
 
+```
 yarn build --watch
+```
