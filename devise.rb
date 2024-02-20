@@ -9,23 +9,22 @@ inject_into_file "Gemfile", before: "group :development, :test do" do
     gem "autoprefixer-rails"
     gem "font-awesome-sass", "~> 6.1"
     gem "simple_form", github: "heartcombo/simple_form"
+    gem "sassc-rails"
 
   RUBY
 end
 
-inject_into_file "Gemfile", after: 'gem "debug", platforms: %i[ mri mingw x64_mingw ]' do
+inject_into_file "Gemfile", after: "group :development, :test do" do
   "\n  gem \"dotenv-rails\""
 end
-
-gsub_file("Gemfile", '# gem "sassc-rails"', 'gem "sassc-rails"')
 
 # Assets
 ########################################
 run "rm -rf app/assets/stylesheets"
 run "rm -rf vendor"
-run "curl -L https://github.com/lewagon/rails-stylesheets/archive/more-js.zip > stylesheets.zip"
-run "unzip stylesheets.zip -d app/assets && rm -f stylesheets.zip && rm -f app/assets/rails-stylesheets-more-js/README.md"
-run "mv app/assets/rails-stylesheets-more-js app/assets/stylesheets"
+run "curl -L https://github.com/lewagon/rails-stylesheets/archive/master.zip > stylesheets.zip"
+run "unzip stylesheets.zip -d app/assets && rm -f stylesheets.zip && rm -f app/assets/rails-stylesheets-master/README.md"
+run "mv app/assets/rails-stylesheets-master app/assets/stylesheets"
 
 # Layout
 ########################################
@@ -126,16 +125,7 @@ after_bundle do
   ########################################
   rails_command "db:migrate"
   generate("devise:views")
-  gsub_file(
-    "app/views/devise/registrations/new.html.erb",
-    "<%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>",
-    "<%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), data: { turbo: :false }) do |f| %>"
-  )
-  gsub_file(
-    "app/views/devise/sessions/new.html.erb",
-    "<%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>",
-    "<%= simple_form_for(resource, as: resource_name, url: session_path(resource_name), data: { turbo: :false }) do |f| %>"
-  )
+
   link_to = <<~HTML
     <p>Unhappy? <%= link_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
   HTML
@@ -201,5 +191,5 @@ after_bundle do
   ########################################
   git :init
   git add: "."
-  git commit: "-m 'Initial commit'"
+  git commit: "-m 'Initial commit with devise template from https://github.com/lewagon/rails-templates'"
 end
